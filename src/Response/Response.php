@@ -286,4 +286,22 @@ class Response
         $this->body = null;
         return $this;
     }
+    
+    /**
+     * 
+     * Tries to redirect back to the previous page
+     * 
+     * @param string $fallback fallback url to redirect to
+     * 
+     * @return self
+     * 
+     */
+    public function redirectBack(string $fallback = "")
+    {
+        if (isset($_SERVER["HTTP_REFERER"])) {
+            return $this->redirect($_SERVER["HTTP_REFERER"]);
+        } else {
+            return $this->redirect($fallback);
+        }
+    }
 }
